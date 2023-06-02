@@ -35,6 +35,33 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Grab"",
+                    ""type"": ""Button"",
+                    ""id"": ""4fa2ce31-c5e7-4a27-9e37-755ad2444a63"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Smash"",
+                    ""type"": ""Button"",
+                    ""id"": ""b53514f9-dff4-4f48-a620-8e7280ab13ba"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""CameraMovement"",
+                    ""type"": ""Value"",
+                    ""id"": ""f142573a-23fe-4328-aa3e-bef3ef8feb8d"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -114,6 +141,39 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bb520126-bf75-45bd-93b4-3b4500c2a9c6"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Grab"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e22ef1f5-67da-4c64-b406-02923cb59410"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Smash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3d4ab407-e289-41c2-9256-9f5d06fee717"",
+                    ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CameraMovement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -123,6 +183,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         // Player Character
         m_PlayerCharacter = asset.FindActionMap("Player Character", throwIfNotFound: true);
         m_PlayerCharacter_Movement = m_PlayerCharacter.FindAction("Movement", throwIfNotFound: true);
+        m_PlayerCharacter_Grab = m_PlayerCharacter.FindAction("Grab", throwIfNotFound: true);
+        m_PlayerCharacter_Smash = m_PlayerCharacter.FindAction("Smash", throwIfNotFound: true);
+        m_PlayerCharacter_CameraMovement = m_PlayerCharacter.FindAction("CameraMovement", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -185,11 +248,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_PlayerCharacter;
     private List<IPlayerCharacterActions> m_PlayerCharacterActionsCallbackInterfaces = new List<IPlayerCharacterActions>();
     private readonly InputAction m_PlayerCharacter_Movement;
+    private readonly InputAction m_PlayerCharacter_Grab;
+    private readonly InputAction m_PlayerCharacter_Smash;
+    private readonly InputAction m_PlayerCharacter_CameraMovement;
     public struct PlayerCharacterActions
     {
         private @PlayerControls m_Wrapper;
         public PlayerCharacterActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Movement => m_Wrapper.m_PlayerCharacter_Movement;
+        public InputAction @Grab => m_Wrapper.m_PlayerCharacter_Grab;
+        public InputAction @Smash => m_Wrapper.m_PlayerCharacter_Smash;
+        public InputAction @CameraMovement => m_Wrapper.m_PlayerCharacter_CameraMovement;
         public InputActionMap Get() { return m_Wrapper.m_PlayerCharacter; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -202,6 +271,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Movement.started += instance.OnMovement;
             @Movement.performed += instance.OnMovement;
             @Movement.canceled += instance.OnMovement;
+            @Grab.started += instance.OnGrab;
+            @Grab.performed += instance.OnGrab;
+            @Grab.canceled += instance.OnGrab;
+            @Smash.started += instance.OnSmash;
+            @Smash.performed += instance.OnSmash;
+            @Smash.canceled += instance.OnSmash;
+            @CameraMovement.started += instance.OnCameraMovement;
+            @CameraMovement.performed += instance.OnCameraMovement;
+            @CameraMovement.canceled += instance.OnCameraMovement;
         }
 
         private void UnregisterCallbacks(IPlayerCharacterActions instance)
@@ -209,6 +287,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Movement.started -= instance.OnMovement;
             @Movement.performed -= instance.OnMovement;
             @Movement.canceled -= instance.OnMovement;
+            @Grab.started -= instance.OnGrab;
+            @Grab.performed -= instance.OnGrab;
+            @Grab.canceled -= instance.OnGrab;
+            @Smash.started -= instance.OnSmash;
+            @Smash.performed -= instance.OnSmash;
+            @Smash.canceled -= instance.OnSmash;
+            @CameraMovement.started -= instance.OnCameraMovement;
+            @CameraMovement.performed -= instance.OnCameraMovement;
+            @CameraMovement.canceled -= instance.OnCameraMovement;
         }
 
         public void RemoveCallbacks(IPlayerCharacterActions instance)
@@ -229,5 +316,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     public interface IPlayerCharacterActions
     {
         void OnMovement(InputAction.CallbackContext context);
+        void OnGrab(InputAction.CallbackContext context);
+        void OnSmash(InputAction.CallbackContext context);
+        void OnCameraMovement(InputAction.CallbackContext context);
     }
 }

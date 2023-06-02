@@ -1,5 +1,5 @@
 {
-    "name": "New Controls",
+    "name": "PlayerControls",
     "maps": [
         {
             "name": "Player Character",
@@ -10,6 +10,33 @@
                     "type": "Value",
                     "id": "824e191e-c2c1-4fb1-b1c3-9e10799a13a3",
                     "expectedControlType": "Vector3",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Grab",
+                    "type": "Button",
+                    "id": "4fa2ce31-c5e7-4a27-9e37-755ad2444a63",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Smash",
+                    "type": "Button",
+                    "id": "b53514f9-dff4-4f48-a620-8e7280ab13ba",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "CameraMovement",
+                    "type": "Value",
+                    "id": "f142573a-23fe-4328-aa3e-bef3ef8feb8d",
+                    "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -92,6 +119,39 @@
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "bb520126-bf75-45bd-93b4-3b4500c2a9c6",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Grab",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e22ef1f5-67da-4c64-b406-02923cb59410",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Smash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3d4ab407-e289-41c2-9256-9f5d06fee717",
+                    "path": "<Mouse>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CameraMovement",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }

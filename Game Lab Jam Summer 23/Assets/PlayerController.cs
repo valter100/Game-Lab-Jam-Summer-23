@@ -15,4 +15,19 @@ public class PlayerController : MonoBehaviour
     {
         return playerControls.PlayerCharacter.Movement.ReadValue<Vector3>();
     }
+
+    public Vector2 CameraMovement()
+    {
+        return playerControls.PlayerCharacter.CameraMovement.ReadValue<Vector2>();
+    }
+
+    public bool Smash()
+    {
+        return playerControls.PlayerCharacter.Smash.triggered;
+    }
+
+    public bool Grab()
+    {
+        return playerControls.PlayerCharacter.Grab.triggered;
+    }
 }
