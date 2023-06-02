@@ -6,14 +6,25 @@ public class PlayerController : MonoBehaviour
 {
     PlayerControls playerControls;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         playerControls = new PlayerControls();
     }
 
-    public Vector3 GetMovementVector()
+    private void OnEnable()
     {
-        return playerControls.PlayerCharacter.Movement.ReadValue<Vector3>();
+        playerControls.Enable();
+    }
+
+    private void OnDisable()
+    {
+        playerControls.Disable();
+    }
+
+    public Vector2 GetMovementVector()
+    {
+        Debug.Log(playerControls.PlayerCharacter.Movement.ReadValue<Vector2>());
+        return playerControls.PlayerCharacter.Movement.ReadValue<Vector2>();
     }
 
     public Vector2 CameraMovement()
