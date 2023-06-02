@@ -23,7 +23,6 @@ public class PlayerController : MonoBehaviour
 
     public Vector2 GetMovementVector()
     {
-        Debug.Log(playerControls.PlayerCharacter.Movement.ReadValue<Vector2>());
         return playerControls.PlayerCharacter.Movement.ReadValue<Vector2>();
     }
 
