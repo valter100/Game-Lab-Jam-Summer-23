@@ -4,27 +4,37 @@ using UnityEngine;
 
 public class PlayerCharacter : MonoBehaviour
 {
-    [SerializeField] PlayerController playerController;
+    PlayerController playerController;
+
+    [Header("Variable Values")]
     [SerializeField] float movementSpeed;
     [SerializeField] float rotationSpeed;
     [SerializeField] float grabDistance;
     [SerializeField] LayerMask grabLayerMask;
-    [SerializeField] GameObject targetedObject;
-    [SerializeField] GameObject currentRoom;
+    GameObject targetedObject;
+    GameObject currentRoom;
+
+    [Header("Effects")]
+    [SerializeField] GameObject combineEffect;
+    [SerializeField] AudioClip successSound;
 
     //Left
+    [Header("Left Hand")]
     [SerializeField] Transform leftGrabTransform;
-    [SerializeField] GameObject leftGrabGameObject;
+    GameObject leftGrabGameObject;
 
     //Right
+    [Header("Right Hand")]
     [SerializeField] Transform rightGrabTransform;
-    [SerializeField] GameObject rightGrabGameObject;
+    GameObject rightGrabGameObject;
 
     Camera cam;
     Animator animator;
 
     private void Start()
     {
+        playerController = GetComponent<PlayerController>();
+        Cursor.visible = false;
         currentRoom = GameObject.Find("Room_1");
         animator = GetComponent<Animator>();
         cam = Camera.main;
@@ -50,6 +60,11 @@ public class PlayerCharacter : MonoBehaviour
             {
                 targetedObject = hit.transform.gameObject;
                 targetedObject.GetComponent<Outline>().enabled = true;
+
+                if (targetedObject.GetComponent<FixedJoint>())
+                {
+                    targetedObject.GetComponent<FixedJoint>().connectedBody.GetComponent<Outline>().enabled = true;
+                }
             }
         }
         else
@@ -57,6 +72,12 @@ public class PlayerCharacter : MonoBehaviour
             if (targetedObject)
             {
                 targetedObject.GetComponent<Outline>().enabled = false;
+
+                if (targetedObject.GetComponent<FixedJoint>())
+                {
+                    targetedObject.GetComponent<FixedJoint>().connectedBody.GetComponent<Outline>().enabled = false;
+                }
+
                 targetedObject = null;
             }
         }
@@ -67,6 +88,13 @@ public class PlayerCharacter : MonoBehaviour
             {
                 leftGrabGameObject.GetComponent<Rigidbody>().useGravity = true;
                 leftGrabGameObject.GetComponent<Collider>().enabled = true;
+
+                if (leftGrabGameObject.GetComponent<FixedJoint>())
+                {
+                    leftGrabGameObject.GetComponent<FixedJoint>().connectedBody.GetComponent<Collider>().enabled = true;
+                    leftGrabGameObject.GetComponent<FixedJoint>().connectedBody.GetComponent<Rigidbody>().useGravity = true;
+                }
+            
                 leftGrabGameObject = null;
             }
 
@@ -75,7 +103,14 @@ public class PlayerCharacter : MonoBehaviour
                 leftGrabGameObject = targetedObject;
                 leftGrabGameObject.GetComponent<Rigidbody>().useGravity = false;
                 leftGrabGameObject.GetComponent<Collider>().enabled = false;
-                targetedObject.GetComponent<Outline>().enabled = false;
+                leftGrabGameObject.GetComponent<Outline>().enabled = false;
+
+                if (leftGrabGameObject.GetComponent<FixedJoint>())
+                {
+                    leftGrabGameObject.GetComponent<FixedJoint>().connectedBody.GetComponent<Outline>().enabled = false;
+                    leftGrabGameObject.GetComponent<FixedJoint>().connectedBody.GetComponent<Rigidbody>().useGravity = false;
+                    leftGrabGameObject.GetComponent<FixedJoint>().connectedBody.GetComponent<Collider>().enabled = false;
+                }
                 targetedObject = null;
             }
         }
@@ -86,6 +121,13 @@ public class PlayerCharacter : MonoBehaviour
             {
                 rightGrabGameObject.GetComponent<Rigidbody>().useGravity = true;
                 rightGrabGameObject.GetComponent<Collider>().enabled = true;
+
+                if (rightGrabGameObject.GetComponent<FixedJoint>())
+                {
+                    rightGrabGameObject.GetComponent<FixedJoint>().connectedBody.GetComponent<Collider>().enabled = true;
+                    rightGrabGameObject.GetComponent<FixedJoint>().connectedBody.GetComponent<Rigidbody>().useGravity = true;
+                }
+
                 rightGrabGameObject = null;
             }
 
@@ -94,7 +136,15 @@ public class PlayerCharacter : MonoBehaviour
                 rightGrabGameObject = targetedObject;
                 rightGrabGameObject.GetComponent<Rigidbody>().useGravity = false;
                 rightGrabGameObject.GetComponent<Collider>().enabled = false;
-                targetedObject.GetComponent<Outline>().enabled = false;
+                rightGrabGameObject.GetComponent<Outline>().enabled = false;
+
+                if (rightGrabGameObject.GetComponent<FixedJoint>())
+                {
+                    rightGrabGameObject.GetComponent<FixedJoint>().connectedBody.GetComponent<Outline>().enabled = false;
+                    rightGrabGameObject.GetComponent<FixedJoint>().connectedBody.GetComponent<Rigidbody>().useGravity = false;
+                    rightGrabGameObject.GetComponent<FixedJoint>().connectedBody.GetComponent<Collider>().enabled = false;
+                }
+
                 targetedObject = null;
             }
         }
@@ -135,14 +185,29 @@ public class PlayerCharacter : MonoBehaviour
         {
             return;
         }
+
         Debug.Log("Trying to combine: " + leftObject.name + " with: " + rightGrabGameObject.name);
 
-        GetComponent<CombineItem>().JoinItem(leftObject, rightObject);
+
+
+
+
+        animator.Play("Combine");
+
+        //currentRoom.transform.Find("Level Door").GetComponentInChildren<Animator>().Play("Open");
+    }
+
+    public void CombineObjects()
+    {
+        Instantiate(combineEffect, leftGrabTransform.position, Quaternion.Euler(-90, 0, 0));
+        GetComponent<CombineItem>().JoinItem(leftGrabGameObject, rightGrabGameObject);
+        GetComponent<AudioSource>().PlayOneShot(successSound);
 
         leftGrabGameObject = null;
         rightGrabGameObject = null;
         targetedObject = null;
-        currentRoom.transform.Find("Level Door").GetComponentInChildren<Animator>().Play("Open");
+        //Destroy(leftGrabGameObject);
+        //Destroy(rightGrabGameObject);
     }
 
     public void TrySmashObject(GameObject smashObject)

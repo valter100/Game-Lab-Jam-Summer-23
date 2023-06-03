@@ -22,6 +22,8 @@ public class CombineItem : MonoBehaviour
 
         GameObject newObject = new GameObject();
 
+        newObject.name = gameObjectOne.name + " + " + gameObjectTwo.name;
+
         gameObjectTwo.transform.position = gameObjectOne.transform.GetChild(0).position;
         gameObjectTwo.transform.rotation = gameObjectOne.transform.rotation;
 
@@ -36,19 +38,10 @@ public class CombineItem : MonoBehaviour
         gameObjectTwo.GetComponent<Collider>().enabled = true;
 
         gameObjectOne.GetComponent<Rigidbody>().useGravity = true;
-        gameObjectTwo.GetComponent<Rigidbody>().useGravity = true;
-
-        gameObjectOne.layer = 0;
-        gameObjectTwo.layer = 0;
-        
-        var outline = newObject.AddComponent<Outline>();
-        outline.OutlineColor = Color.black;
-        outline.OutlineWidth = 10;
-        outline.enabled = false;
-
-        newObject.layer = 3;
+        //gameObjectTwo.GetComponent<Rigidbody>().useGravity = true;
 
         gameObjectOne.AddComponent<FixedJoint>().connectedBody = gameObjectTwo.GetComponent<Rigidbody>();
+        gameObjectTwo.AddComponent<FixedJoint>().connectedBody = gameObjectOne.GetComponent<Rigidbody>();
 
 
         
