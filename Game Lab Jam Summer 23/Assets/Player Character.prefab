@@ -176,6 +176,7 @@ GameObject:
   - component: {fileID: 895386638}
   - component: {fileID: 895386643}
   - component: {fileID: 895386644}
+  - component: {fileID: 554729901}
   m_Layer: 0
   m_Name: Player Character
   m_TagString: Untagged
@@ -192,8 +193,8 @@ Transform:
   m_GameObject: {fileID: 6041497629407420981}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.32926223, y: -0.6588956, z: 0.6756588}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 8779963958285829233}
   - {fileID: 7911333491162047976}
@@ -281,12 +282,14 @@ MonoBehaviour:
   movementSpeed: 2
   rotationSpeed: 1
   grabDistance: 3
-  grabTransform: {fileID: 871399678455127978}
   grabLayerMask:
     serializedVersion: 2
     m_Bits: 8
   targetedObject: {fileID: 0}
-  grabGameObject: {fileID: 0}
+  leftGrabTransform: {fileID: 871399678455127978}
+  leftGrabGameObject: {fileID: 0}
+  rightGrabTransform: {fileID: 993910737566482917}
+  rightGrabGameObject: {fileID: 0}
 --- !u!114 &895386643
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -320,6 +323,22 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!54 &554729901
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6041497629407420981}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 80
+  m_CollisionDetection: 0
 --- !u!1 &6525739539684036424
 GameObject:
   m_ObjectHideFlags: 0
