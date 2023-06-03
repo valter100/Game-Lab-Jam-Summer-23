@@ -4,10 +4,7 @@ using UnityEngine;
 
 public class CombineItem : MonoBehaviour
 {
-    [SerializeField] private GameObject gameObjectOne;
-    [SerializeField] private GameObject gameObjectTwo;
 
-    
     // Start is called before the first frame update
     void Start()
     {
@@ -20,38 +17,41 @@ public class CombineItem : MonoBehaviour
 
     }
 
-    public void JoinItem()
+    public GameObject JoinItem(GameObject gameObjectOne, GameObject gameObjectTwo)
     {
-        if (Input.GetKeyDown(KeyCode.Space) && gameObjectOne != null && gameObjectTwo != null)
-        {
-            GameObject newObject = new GameObject();
 
-            //gameObjectOne.GetComponent<MeshCollider>().enabled= false;
-            //gameObjectTwo.GetComponent<MeshCollider>().enabled = false;
+        GameObject newObject = new GameObject();
+
+        gameObjectTwo.transform.position = gameObjectOne.transform.GetChild(0).position;
+        gameObjectTwo.transform.rotation = gameObjectOne.transform.rotation;
+
+        Vector3 tempVector = gameObjectOne.transform.GetChild(0).position - gameObjectTwo.transform.GetChild(0).position;
+
+        gameObjectTwo.transform.position += tempVector;
+
+        gameObjectOne.transform.parent = newObject.transform;
+        gameObjectTwo.transform.parent = newObject.transform;
+
+        gameObjectOne.GetComponent<Collider>().enabled = true;
+        gameObjectTwo.GetComponent<Collider>().enabled = true;
+
+        gameObjectOne.GetComponent<Rigidbody>().useGravity = true;
+        gameObjectTwo.GetComponent<Rigidbody>().useGravity = true;
+
+        gameObjectOne.layer = 0;
+        gameObjectTwo.layer = 0;
+        
+        var outline = newObject.AddComponent<Outline>();
+        outline.OutlineColor = Color.black;
+        outline.OutlineWidth = 10;
+        outline.enabled = false;
+
+        newObject.layer = 3;
+
+        gameObjectOne.AddComponent<FixedJoint>().connectedBody = gameObjectTwo.GetComponent<Rigidbody>();
 
 
-            gameObjectTwo.transform.position = gameObjectOne.transform.GetChild(0).position;
-            gameObjectTwo.transform.rotation = gameObjectOne.transform.rotation;
-
-            Vector3 tempVector = gameObjectOne.transform.GetChild(0).position - gameObjectTwo.transform.GetChild(0).position;
-
-            gameObjectTwo.transform.position += tempVector;
-
-            gameObjectOne.transform.parent = newObject.transform;
-            gameObjectTwo.transform.parent = newObject.transform;
-
-            gameObjectOne.GetComponent<Rigidbody>().velocity = Vector3.zero;
-            gameObjectTwo.GetComponent<Rigidbody>().velocity = Vector3.zero;
-
-            //gameObjectOne.GetComponent<FixedJoint>().connectedBody = gameObjectTwo.GetComponent<Rigidbody>();
-
-            //gameObjectOne.GetComponent<Rigidbody>().isKinematic = true;
-            //gameObjectTwo.GetComponent<Rigidbody>().isKinematic = true;
-
-            //newObject.AddComponent<Rigidbody>();    
-
-            //gameObjectOne.GetComponent<MeshCollider>().enabled = true;
-            //gameObjectTwo.GetComponent<MeshCollider>().enabled = true;
-        }
+        
+        return newObject;
     }
 }

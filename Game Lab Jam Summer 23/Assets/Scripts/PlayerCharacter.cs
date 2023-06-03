@@ -131,8 +131,17 @@ public class PlayerCharacter : MonoBehaviour
 
     public void TryCombine(GameObject leftObject, GameObject rightObject)
     {
+        if (!leftObject.transform.Find("AttachmentPoint") || !rightObject.transform.Find("AttachmentPoint"))
+        {
+            return;
+        }
         Debug.Log("Trying to combine: " + leftObject.name + " with: " + rightGrabGameObject.name);
 
+        GetComponent<CombineItem>().JoinItem(leftObject, rightObject);
+
+        leftGrabGameObject = null;
+        rightGrabGameObject = null;
+        targetedObject = null;
         currentRoom.transform.Find("Level Door").GetComponentInChildren<Animator>().Play("Open");
     }
 
