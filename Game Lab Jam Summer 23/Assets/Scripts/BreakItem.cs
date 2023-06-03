@@ -16,10 +16,15 @@ public class BreakItem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+    }
+
+    public void SplitItem()
+    {
         if (Input.GetKeyDown(KeyCode.Q) && gameObject != null)
         {
             Debug.Log(breakItem.transform.childCount);
-            
+
             for (int i = 0; i < breakItem.transform.childCount; i++)
             {
                 //breakItem.transform.GetChild(i).transform.SetParent(null);

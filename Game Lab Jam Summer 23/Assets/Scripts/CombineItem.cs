@@ -17,7 +17,12 @@ public class CombineItem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E) && gameObjectOne != null && gameObjectTwo != null)
+
+    }
+
+    public void JoinItem()
+    {
+        if (Input.GetKeyDown(KeyCode.Space) && gameObjectOne != null && gameObjectTwo != null)
         {
             GameObject newObject = new GameObject();
 
