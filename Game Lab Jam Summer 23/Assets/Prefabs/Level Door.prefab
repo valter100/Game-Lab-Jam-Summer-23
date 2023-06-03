@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 747848175193548306}
   - component: {fileID: 747848175192417490}
   - component: {fileID: 747848175194318387}
+  - component: {fileID: 747888917684796559}
   - component: {fileID: 747848175194318384}
   m_Layer: 0
   m_Name: Door Body
@@ -98,6 +99,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.3386126, y: 2.1229603, z: 0.16294214}
   m_Center: {x: 0.666602, y: 1.1105713, z: 0.07911377}
+--- !u!114 &747888917684796559
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 747848175194618386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c27d18cf7738f745adc13d3eca37d91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  questItemsNeeded: []
 --- !u!95 &747848175194318384
 Animator:
   serializedVersion: 5

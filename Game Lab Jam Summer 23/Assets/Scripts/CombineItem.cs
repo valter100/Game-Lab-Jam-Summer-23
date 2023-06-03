@@ -19,13 +19,18 @@ public class CombineItem : MonoBehaviour
 
     public GameObject JoinItem(GameObject gameObjectOne, GameObject gameObjectTwo)
     {
-
         GameObject newObject = new GameObject();
 
-        newObject.name = gameObjectOne.name + " + " + gameObjectTwo.name;
+        //if(gameObjectOne.GetComponent<ItemComponent>().IsConnected())
+        //{
 
-        gameObjectTwo.transform.position = gameObjectOne.transform.GetChild(0).position;
-        gameObjectTwo.transform.rotation = gameObjectOne.transform.rotation;
+        //}
+
+        newObject.name = gameObjectOne.name + " + " + gameObjectTwo.name;
+        gameObjectOne.GetComponent<ItemComponent>().BindItem(gameObjectTwo, true);
+
+        //gameObjectTwo.transform.position = gameObjectOne.transform.GetChild(0).position;
+        //gameObjectTwo.transform.rotation = gameObjectOne.transform.rotation;
 
         Vector3 tempVector = gameObjectOne.transform.GetChild(0).position - gameObjectTwo.transform.GetChild(0).position;
 
@@ -38,13 +43,12 @@ public class CombineItem : MonoBehaviour
         gameObjectTwo.GetComponent<Collider>().enabled = true;
 
         gameObjectOne.GetComponent<Rigidbody>().useGravity = true;
-        //gameObjectTwo.GetComponent<Rigidbody>().useGravity = true;
+        gameObjectTwo.GetComponent<Rigidbody>().useGravity = true;
 
         gameObjectOne.AddComponent<FixedJoint>().connectedBody = gameObjectTwo.GetComponent<Rigidbody>();
         gameObjectTwo.AddComponent<FixedJoint>().connectedBody = gameObjectOne.GetComponent<Rigidbody>();
 
 
-        
         return newObject;
     }
 }
