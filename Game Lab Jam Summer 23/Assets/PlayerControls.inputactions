@@ -15,9 +15,18 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Grab",
+                    "name": "Grab Left",
                     "type": "Button",
                     "id": "4fa2ce31-c5e7-4a27-9e37-755ad2444a63",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Grab Right",
+                    "type": "Button",
+                    "id": "641454e7-0287-4dc7-b0af-4477b8f208b8",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -50,14 +59,14 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Grab",
+                    "action": "Grab Left",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
                     "id": "e22ef1f5-67da-4c64-b406-02923cb59410",
-                    "path": "<Keyboard>/e",
+                    "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -68,7 +77,7 @@
                 {
                     "name": "",
                     "id": "3d4ab407-e289-41c2-9256-9f5d06fee717",
-                    "path": "<Mouse>/position",
+                    "path": "<Mouse>/delta",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -130,6 +139,17 @@
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "ff9f13f7-fd51-4e18-9f00-d96a95218d3c",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Grab Right",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }

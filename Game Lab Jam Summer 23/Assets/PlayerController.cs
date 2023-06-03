@@ -23,7 +23,6 @@ public class PlayerController : MonoBehaviour
 
     public Vector2 GetMovementVector()
     {
-        Debug.Log(playerControls.PlayerCharacter.Movement.ReadValue<Vector2>());
         return playerControls.PlayerCharacter.Movement.ReadValue<Vector2>();
     }
 
@@ -37,8 +36,13 @@ public class PlayerController : MonoBehaviour
         return playerControls.PlayerCharacter.Smash.triggered;
     }
 
-    public bool Grab()
+    public bool GrabLeft()
     {
-        return playerControls.PlayerCharacter.Grab.triggered;
+        return playerControls.PlayerCharacter.GrabLeft.triggered;
+    }
+
+    public bool GrabRight()
+    {
+        return playerControls.PlayerCharacter.GrabRight.triggered;
     }
 }
