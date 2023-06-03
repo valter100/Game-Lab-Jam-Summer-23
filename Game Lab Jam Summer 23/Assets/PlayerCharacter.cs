@@ -8,9 +8,17 @@ public class PlayerCharacter : MonoBehaviour
     [SerializeField] float movementSpeed;
     [SerializeField] float rotationSpeed;
     [SerializeField] float grabDistance;
-    [SerializeField] Transform grabTransform;
     [SerializeField] LayerMask grabLayerMask;
-    [SerializeField] GameObject grabGameObject;
+    [SerializeField] GameObject targetedObject;
+
+    //Left
+    [SerializeField] Transform leftGrabTransform;
+    [SerializeField] GameObject leftGrabGameObject;
+
+    //Right
+    [SerializeField] Transform rightGrabTransform;
+    [SerializeField] GameObject rightGrabGameObject;
+
     Camera cam;
     Animator animator;
 
@@ -38,14 +46,61 @@ public class PlayerCharacter : MonoBehaviour
             animator.Play("Punch");
         }
 
-        if (playerController.Grab())
+        RaycastHit hit;
+        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, grabDistance, grabLayerMask))
         {
-            RaycastHit hit;
+            if (hit.transform.gameObject != leftGrabGameObject || hit.transform.gameObject != rightGrabGameObject)
+                targetedObject = hit.transform.gameObject;
+        }
+        else
+        {
+            targetedObject = null;
+        }
 
-            if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, grabDistance, grabLayerMask))
+        if (playerController.GrabLeft())
+        {
+            if(leftGrabGameObject)
             {
-                hit.transform.position = grabTransform.position;
+                leftGrabGameObject.GetComponent<Rigidbody>().useGravity = true;
+                leftGrabGameObject.GetComponent<Collider>().enabled = true;
+                leftGrabGameObject = null;
             }
+
+            if (targetedObject)
+            {
+                leftGrabGameObject = targetedObject;
+                leftGrabGameObject.GetComponent<Rigidbody>().useGravity = false;
+                leftGrabGameObject.GetComponent<Collider>().enabled = false;
+                targetedObject = null;
+            }
+        }
+
+        if (playerController.GrabRight())
+        {
+            if (rightGrabGameObject)
+            {
+                rightGrabGameObject.GetComponent<Rigidbody>().useGravity = true;
+                rightGrabGameObject.GetComponent<Collider>().enabled = true;
+                rightGrabGameObject = null;
+            }
+
+            if (targetedObject)
+            {
+                rightGrabGameObject = targetedObject;
+                rightGrabGameObject.GetComponent<Rigidbody>().useGravity = false;
+                rightGrabGameObject.GetComponent<Collider>().enabled = false;
+                targetedObject = null;
+            }
+        }
+
+        if (leftGrabGameObject)
+        {
+            leftGrabGameObject.transform.position = leftGrabTransform.position;
+        }
+
+        if(rightGrabGameObject)
+        {
+            rightGrabGameObject.transform.position = rightGrabTransform.position;
         }
 
         Debug.DrawRay(cam.transform.position, cam.transform.forward * grabDistance, Color.red);

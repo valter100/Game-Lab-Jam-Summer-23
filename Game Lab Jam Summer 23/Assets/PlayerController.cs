@@ -36,8 +36,13 @@ public class PlayerController : MonoBehaviour
         return playerControls.PlayerCharacter.Smash.triggered;
     }
 
-    public bool Grab()
+    public bool GrabLeft()
     {
-        return playerControls.PlayerCharacter.Grab.triggered;
+        return playerControls.PlayerCharacter.GrabLeft.triggered;
+    }
+
+    public bool GrabRight()
+    {
+        return playerControls.PlayerCharacter.GrabRight.triggered;
     }
 }

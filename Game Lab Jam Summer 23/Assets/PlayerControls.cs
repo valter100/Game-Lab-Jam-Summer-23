@@ -37,9 +37,18 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""Grab"",
+                    ""name"": ""Grab Left"",
                     ""type"": ""Button"",
                     ""id"": ""4fa2ce31-c5e7-4a27-9e37-755ad2444a63"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Grab Right"",
+                    ""type"": ""Button"",
+                    ""id"": ""641454e7-0287-4dc7-b0af-4477b8f208b8"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -72,7 +81,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Grab"",
+                    ""action"": ""Grab Left"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -152,6 +161,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ff9f13f7-fd51-4e18-9f00-d96a95218d3c"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Grab Right"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -161,7 +181,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         // Player Character
         m_PlayerCharacter = asset.FindActionMap("Player Character", throwIfNotFound: true);
         m_PlayerCharacter_Movement = m_PlayerCharacter.FindAction("Movement", throwIfNotFound: true);
-        m_PlayerCharacter_Grab = m_PlayerCharacter.FindAction("Grab", throwIfNotFound: true);
+        m_PlayerCharacter_GrabLeft = m_PlayerCharacter.FindAction("Grab Left", throwIfNotFound: true);
+        m_PlayerCharacter_GrabRight = m_PlayerCharacter.FindAction("Grab Right", throwIfNotFound: true);
         m_PlayerCharacter_Smash = m_PlayerCharacter.FindAction("Smash", throwIfNotFound: true);
         m_PlayerCharacter_CameraMovement = m_PlayerCharacter.FindAction("CameraMovement", throwIfNotFound: true);
     }
@@ -226,7 +247,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_PlayerCharacter;
     private List<IPlayerCharacterActions> m_PlayerCharacterActionsCallbackInterfaces = new List<IPlayerCharacterActions>();
     private readonly InputAction m_PlayerCharacter_Movement;
-    private readonly InputAction m_PlayerCharacter_Grab;
+    private readonly InputAction m_PlayerCharacter_GrabLeft;
+    private readonly InputAction m_PlayerCharacter_GrabRight;
     private readonly InputAction m_PlayerCharacter_Smash;
     private readonly InputAction m_PlayerCharacter_CameraMovement;
     public struct PlayerCharacterActions
@@ -234,7 +256,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         private @PlayerControls m_Wrapper;
         public PlayerCharacterActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Movement => m_Wrapper.m_PlayerCharacter_Movement;
-        public InputAction @Grab => m_Wrapper.m_PlayerCharacter_Grab;
+        public InputAction @GrabLeft => m_Wrapper.m_PlayerCharacter_GrabLeft;
+        public InputAction @GrabRight => m_Wrapper.m_PlayerCharacter_GrabRight;
         public InputAction @Smash => m_Wrapper.m_PlayerCharacter_Smash;
         public InputAction @CameraMovement => m_Wrapper.m_PlayerCharacter_CameraMovement;
         public InputActionMap Get() { return m_Wrapper.m_PlayerCharacter; }
@@ -249,9 +272,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Movement.started += instance.OnMovement;
             @Movement.performed += instance.OnMovement;
             @Movement.canceled += instance.OnMovement;
-            @Grab.started += instance.OnGrab;
-            @Grab.performed += instance.OnGrab;
-            @Grab.canceled += instance.OnGrab;
+            @GrabLeft.started += instance.OnGrabLeft;
+            @GrabLeft.performed += instance.OnGrabLeft;
+            @GrabLeft.canceled += instance.OnGrabLeft;
+            @GrabRight.started += instance.OnGrabRight;
+            @GrabRight.performed += instance.OnGrabRight;
+            @GrabRight.canceled += instance.OnGrabRight;
             @Smash.started += instance.OnSmash;
             @Smash.performed += instance.OnSmash;
             @Smash.canceled += instance.OnSmash;
@@ -265,9 +291,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Movement.started -= instance.OnMovement;
             @Movement.performed -= instance.OnMovement;
             @Movement.canceled -= instance.OnMovement;
-            @Grab.started -= instance.OnGrab;
-            @Grab.performed -= instance.OnGrab;
-            @Grab.canceled -= instance.OnGrab;
+            @GrabLeft.started -= instance.OnGrabLeft;
+            @GrabLeft.performed -= instance.OnGrabLeft;
+            @GrabLeft.canceled -= instance.OnGrabLeft;
+            @GrabRight.started -= instance.OnGrabRight;
+            @GrabRight.performed -= instance.OnGrabRight;
+            @GrabRight.canceled -= instance.OnGrabRight;
             @Smash.started -= instance.OnSmash;
             @Smash.performed -= instance.OnSmash;
             @Smash.canceled -= instance.OnSmash;
@@ -294,7 +323,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     public interface IPlayerCharacterActions
     {
         void OnMovement(InputAction.CallbackContext context);
-        void OnGrab(InputAction.CallbackContext context);
+        void OnGrabLeft(InputAction.CallbackContext context);
+        void OnGrabRight(InputAction.CallbackContext context);
         void OnSmash(InputAction.CallbackContext context);
         void OnCameraMovement(InputAction.CallbackContext context);
     }
