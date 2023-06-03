@@ -45,4 +45,9 @@ public class PlayerController : MonoBehaviour
     {
         return playerControls.PlayerCharacter.GrabRight.triggered;
     }
+
+    public bool Combine()
+    {
+        return playerControls.PlayerCharacter.Combine.triggered;
+    }
 }

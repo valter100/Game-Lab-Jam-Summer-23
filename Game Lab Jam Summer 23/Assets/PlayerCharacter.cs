@@ -41,25 +41,27 @@ public class PlayerCharacter : MonoBehaviour
         }
         transform.Rotate(new Vector3(0, playerController.CameraMovement().x * rotationSpeed, 0));
 
-        if (playerController.Smash())
-        {
-            animator.Play("Punch");
-        }
-
         RaycastHit hit;
         if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, grabDistance, grabLayerMask))
         {
             if (hit.transform.gameObject != leftGrabGameObject || hit.transform.gameObject != rightGrabGameObject)
+            {
                 targetedObject = hit.transform.gameObject;
+                targetedObject.GetComponent<Outline>().enabled = true;
+            }
         }
         else
         {
-            targetedObject = null;
+            if (targetedObject)
+            {
+                targetedObject.GetComponent<Outline>().enabled = false;
+                targetedObject = null;
+            }
         }
 
         if (playerController.GrabLeft())
         {
-            if(leftGrabGameObject)
+            if (leftGrabGameObject)
             {
                 leftGrabGameObject.GetComponent<Rigidbody>().useGravity = true;
                 leftGrabGameObject.GetComponent<Collider>().enabled = true;
@@ -71,6 +73,7 @@ public class PlayerCharacter : MonoBehaviour
                 leftGrabGameObject = targetedObject;
                 leftGrabGameObject.GetComponent<Rigidbody>().useGravity = false;
                 leftGrabGameObject.GetComponent<Collider>().enabled = false;
+                targetedObject.GetComponent<Outline>().enabled = false;
                 targetedObject = null;
             }
         }
@@ -89,6 +92,7 @@ public class PlayerCharacter : MonoBehaviour
                 rightGrabGameObject = targetedObject;
                 rightGrabGameObject.GetComponent<Rigidbody>().useGravity = false;
                 rightGrabGameObject.GetComponent<Collider>().enabled = false;
+                targetedObject.GetComponent<Outline>().enabled = false;
                 targetedObject = null;
             }
         }
@@ -98,11 +102,38 @@ public class PlayerCharacter : MonoBehaviour
             leftGrabGameObject.transform.position = leftGrabTransform.position;
         }
 
-        if(rightGrabGameObject)
+        if (rightGrabGameObject)
         {
             rightGrabGameObject.transform.position = rightGrabTransform.position;
         }
 
+        if (rightGrabGameObject && leftGrabGameObject && playerController.Combine())
+        {
+            TryCombine(leftGrabGameObject, rightGrabGameObject);
+        }
+
+        if (leftGrabGameObject && !rightGrabGameObject && playerController.Smash())
+        {
+            animator.Play("RightSmash");
+            TrySmashObject(leftGrabGameObject);
+        }
+
+        if (rightGrabGameObject && !leftGrabGameObject && playerController.Smash())
+        {
+            animator.Play("LeftSmash");
+            TrySmashObject(rightGrabGameObject);
+        }
+
         Debug.DrawRay(cam.transform.position, cam.transform.forward * grabDistance, Color.red);
+    }
+
+    public void TryCombine(GameObject leftObject, GameObject rightObject)
+    {
+        Debug.Log("Trying to combine: " + leftObject.name + " with: " + rightGrabGameObject.name);
+    }
+
+    public void TrySmashObject(GameObject smashObject)
+    {
+        Debug.Log("Trying to smash: " + smashObject.name);
     }
 }

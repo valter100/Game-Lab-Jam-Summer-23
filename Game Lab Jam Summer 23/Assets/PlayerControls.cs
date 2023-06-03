@@ -71,6 +71,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Combine"",
+                    ""type"": ""Button"",
+                    ""id"": ""c4ddee28-e196-42e5-bd4e-f4c980785a17"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -172,6 +181,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""Grab Right"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""abd8ff3b-ad26-479a-88f4-80b7363cac71"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Combine"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -185,6 +205,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_PlayerCharacter_GrabRight = m_PlayerCharacter.FindAction("Grab Right", throwIfNotFound: true);
         m_PlayerCharacter_Smash = m_PlayerCharacter.FindAction("Smash", throwIfNotFound: true);
         m_PlayerCharacter_CameraMovement = m_PlayerCharacter.FindAction("CameraMovement", throwIfNotFound: true);
+        m_PlayerCharacter_Combine = m_PlayerCharacter.FindAction("Combine", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -251,6 +272,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerCharacter_GrabRight;
     private readonly InputAction m_PlayerCharacter_Smash;
     private readonly InputAction m_PlayerCharacter_CameraMovement;
+    private readonly InputAction m_PlayerCharacter_Combine;
     public struct PlayerCharacterActions
     {
         private @PlayerControls m_Wrapper;
@@ -260,6 +282,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @GrabRight => m_Wrapper.m_PlayerCharacter_GrabRight;
         public InputAction @Smash => m_Wrapper.m_PlayerCharacter_Smash;
         public InputAction @CameraMovement => m_Wrapper.m_PlayerCharacter_CameraMovement;
+        public InputAction @Combine => m_Wrapper.m_PlayerCharacter_Combine;
         public InputActionMap Get() { return m_Wrapper.m_PlayerCharacter; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -284,6 +307,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @CameraMovement.started += instance.OnCameraMovement;
             @CameraMovement.performed += instance.OnCameraMovement;
             @CameraMovement.canceled += instance.OnCameraMovement;
+            @Combine.started += instance.OnCombine;
+            @Combine.performed += instance.OnCombine;
+            @Combine.canceled += instance.OnCombine;
         }
 
         private void UnregisterCallbacks(IPlayerCharacterActions instance)
@@ -303,6 +329,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @CameraMovement.started -= instance.OnCameraMovement;
             @CameraMovement.performed -= instance.OnCameraMovement;
             @CameraMovement.canceled -= instance.OnCameraMovement;
+            @Combine.started -= instance.OnCombine;
+            @Combine.performed -= instance.OnCombine;
+            @Combine.canceled -= instance.OnCombine;
         }
 
         public void RemoveCallbacks(IPlayerCharacterActions instance)
@@ -327,5 +356,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnGrabRight(InputAction.CallbackContext context);
         void OnSmash(InputAction.CallbackContext context);
         void OnCameraMovement(InputAction.CallbackContext context);
+        void OnCombine(InputAction.CallbackContext context);
     }
 }
