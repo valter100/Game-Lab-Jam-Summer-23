@@ -12,14 +12,6 @@ public class BrokenItem : MonoBehaviour
     {
         rb = this.GetComponent<Rigidbody>();
         rb.AddForce(Vector3.up * Random.Range(speed * 0.8f, speed) * Time.deltaTime);
-
-        //Transform parent = this.transform.parent;
-        //this.transform.parent = null;
-        //if (parent.childCount == 0)
-        //{
-            
-        //    Destroy(parent.gameObject);
-        //} 
     }
 
     // Update is called once per frame
