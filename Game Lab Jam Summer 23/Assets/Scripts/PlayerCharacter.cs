@@ -10,6 +10,7 @@ public class PlayerCharacter : MonoBehaviour
     [SerializeField] float grabDistance;
     [SerializeField] LayerMask grabLayerMask;
     [SerializeField] GameObject targetedObject;
+    [SerializeField] GameObject currentRoom;
 
     //Left
     [SerializeField] Transform leftGrabTransform;
@@ -24,6 +25,7 @@ public class PlayerCharacter : MonoBehaviour
 
     private void Start()
     {
+        currentRoom = GameObject.Find("Room_1");
         animator = GetComponent<Animator>();
         cam = Camera.main;
     }
@@ -130,6 +132,8 @@ public class PlayerCharacter : MonoBehaviour
     public void TryCombine(GameObject leftObject, GameObject rightObject)
     {
         Debug.Log("Trying to combine: " + leftObject.name + " with: " + rightGrabGameObject.name);
+
+        currentRoom.transform.Find("Level Door").GetComponentInChildren<Animator>().Play("Open");
     }
 
     public void TrySmashObject(GameObject smashObject)
