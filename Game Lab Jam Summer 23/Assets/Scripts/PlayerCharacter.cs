@@ -86,31 +86,14 @@ public class PlayerCharacter : MonoBehaviour
         {
             if (leftGrabGameObject)
             {
-                leftGrabGameObject.GetComponent<Rigidbody>().useGravity = true;
-                leftGrabGameObject.GetComponent<Collider>().enabled = true;
-
-                if (leftGrabGameObject.GetComponent<FixedJoint>())
-                {
-                    leftGrabGameObject.GetComponent<FixedJoint>().connectedBody.GetComponent<Collider>().enabled = true;
-                    leftGrabGameObject.GetComponent<FixedJoint>().connectedBody.GetComponent<Rigidbody>().useGravity = true;
-                }
-            
+                ActivateObject(leftGrabGameObject);
                 leftGrabGameObject = null;
             }
 
             if (targetedObject)
             {
                 leftGrabGameObject = targetedObject;
-                leftGrabGameObject.GetComponent<Rigidbody>().useGravity = false;
-                leftGrabGameObject.GetComponent<Collider>().enabled = false;
-                leftGrabGameObject.GetComponent<Outline>().enabled = false;
-
-                if (leftGrabGameObject.GetComponent<FixedJoint>())
-                {
-                    leftGrabGameObject.GetComponent<FixedJoint>().connectedBody.GetComponent<Outline>().enabled = false;
-                    leftGrabGameObject.GetComponent<FixedJoint>().connectedBody.GetComponent<Rigidbody>().useGravity = false;
-                    leftGrabGameObject.GetComponent<FixedJoint>().connectedBody.GetComponent<Collider>().enabled = false;
-                }
+                DeactivateObject(leftGrabGameObject);
                 targetedObject = null;
             }
         }
@@ -119,32 +102,14 @@ public class PlayerCharacter : MonoBehaviour
         {
             if (rightGrabGameObject)
             {
-                rightGrabGameObject.GetComponent<Rigidbody>().useGravity = true;
-                rightGrabGameObject.GetComponent<Collider>().enabled = true;
-
-                if (rightGrabGameObject.GetComponent<FixedJoint>())
-                {
-                    rightGrabGameObject.GetComponent<FixedJoint>().connectedBody.GetComponent<Collider>().enabled = true;
-                    rightGrabGameObject.GetComponent<FixedJoint>().connectedBody.GetComponent<Rigidbody>().useGravity = true;
-                }
-
+                ActivateObject(rightGrabGameObject);
                 rightGrabGameObject = null;
             }
 
             if (targetedObject)
             {
                 rightGrabGameObject = targetedObject;
-                rightGrabGameObject.GetComponent<Rigidbody>().useGravity = false;
-                rightGrabGameObject.GetComponent<Collider>().enabled = false;
-                rightGrabGameObject.GetComponent<Outline>().enabled = false;
-
-                if (rightGrabGameObject.GetComponent<FixedJoint>())
-                {
-                    rightGrabGameObject.GetComponent<FixedJoint>().connectedBody.GetComponent<Outline>().enabled = false;
-                    rightGrabGameObject.GetComponent<FixedJoint>().connectedBody.GetComponent<Rigidbody>().useGravity = false;
-                    rightGrabGameObject.GetComponent<FixedJoint>().connectedBody.GetComponent<Collider>().enabled = false;
-                }
-
+                DeactivateObject(rightGrabGameObject);
                 targetedObject = null;
             }
         }
@@ -167,13 +132,19 @@ public class PlayerCharacter : MonoBehaviour
         if (leftGrabGameObject && !rightGrabGameObject && playerController.Smash())
         {
             animator.Play("RightSmash");
-            TrySmashObject(leftGrabGameObject);
+            if(TrySmashObject(leftGrabGameObject))
+            {
+                leftGrabGameObject = null;
+            }
         }
 
         if (rightGrabGameObject && !leftGrabGameObject && playerController.Smash())
         {
             animator.Play("LeftSmash");
-            TrySmashObject(rightGrabGameObject);
+            if(TrySmashObject(rightGrabGameObject))
+            {
+                rightGrabGameObject = null;
+            }
         }
 
         Debug.DrawRay(cam.transform.position, cam.transform.forward * grabDistance, Color.red);
@@ -210,8 +181,49 @@ public class PlayerCharacter : MonoBehaviour
         //Destroy(rightGrabGameObject);
     }
 
-    public void TrySmashObject(GameObject smashObject)
+    public bool TrySmashObject(GameObject smashObject)
     {
         Debug.Log("Trying to smash: " + smashObject.name);
+
+        if(smashObject.GetComponent<FixedJoint>())
+        {
+            GameObject otherObject = smashObject.GetComponent<FixedJoint>().connectedBody.gameObject;
+
+            ActivateObject(smashObject);
+            ActivateObject(otherObject);
+
+            Destroy(otherObject.GetComponent<FixedJoint>());
+            Destroy(smashObject.GetComponent<FixedJoint>());
+
+            return true;
+        }
+
+        return false;
+    }
+
+    public void ActivateObject(GameObject go)
+    {
+        go.GetComponent<Rigidbody>().useGravity = true;
+        go.GetComponent<Collider>().enabled = true;
+
+        if (go.GetComponent<FixedJoint>())
+        {
+            go.GetComponent<Rigidbody>().useGravity = true;
+            go.GetComponent<Collider>().enabled = true;
+        }
+    }
+
+    public void DeactivateObject(GameObject go)
+    {
+        go.GetComponent<Rigidbody>().useGravity = false;
+        go.GetComponent<Collider>().enabled = false;
+        go.GetComponent<Outline>().enabled = false;
+
+        if (go.GetComponent<FixedJoint>())
+        {
+            go.GetComponent<Rigidbody>().useGravity = false;
+            go.GetComponent<Collider>().enabled = false;
+            go.GetComponent<Outline>().enabled = false;
+        }
     }
 }
