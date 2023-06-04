@@ -140,6 +140,8 @@ public class PlayerCharacter : MonoBehaviour
 
         if (leftGrabGameObject)
         {
+            //Vector3 rotateVector = gameObject.transform.forward;
+
             if(!leftGrabGameObject.GetComponent<FixedJoint>() && !leftGrabGameObject.GetComponent<Rigidbody>())
             {
                 leftGrabGameObject.transform.GetChild(0).transform.position = leftGrabTransform.position;
@@ -148,10 +150,14 @@ public class PlayerCharacter : MonoBehaviour
             {
                 leftGrabGameObject.transform.position = leftGrabTransform.position;
             }
+
+            //leftGrabGameObject.transform.rotation = Quaternion.LookRotation(rotateVector);
         }
 
         if (rightGrabGameObject)
         {
+            //Vector3 rotateVector = gameObject.transform.forward;
+
             if (!rightGrabGameObject.GetComponent<FixedJoint>() && !rightGrabGameObject.GetComponent<Rigidbody>())
             {
                 rightGrabGameObject.transform.GetChild(0).transform.position = rightGrabTransform.position;
@@ -160,6 +166,8 @@ public class PlayerCharacter : MonoBehaviour
             {
                 rightGrabGameObject.transform.position = rightGrabTransform.position;
             }
+
+            //rightGrabGameObject.transform.rotation = Quaternion.LookRotation(rotateVector);
         }
 
         if (rightGrabGameObject && leftGrabGameObject && playerController.Combine())
@@ -191,21 +199,14 @@ public class PlayerCharacter : MonoBehaviour
                     continue;
 
                 ItemComponent shotComponent = null;
-                //if (item.GetComponentInChildren<ItemComponent>())
-                //    shotComponent = item.GetComponentInChildren<ItemComponent>();
-
                 if(item.transform.GetChild(0).name == shootComponent.gameObject.name)
                 {
                     if(item.transform.GetChild(1).GetComponent<ItemComponent>())
                         shotComponent = item.transform.GetChild(1).GetComponent<ItemComponent>();
-                    else
-                        shotComponent = item.transform.GetChild(0).GetComponent<ItemComponent>();
                 }
-                else if(item.transform.GetChild(1).name == shootComponent.gameObject.name)
+                else if (item.transform.GetChild(1).name == shootComponent.gameObject.name)
                 {
-                    if (item.transform.GetChild(1).GetComponent<ItemComponent>())
-                        shotComponent = item.transform.GetChild(1).GetComponent<ItemComponent>();
-                    else
+                    if (item.transform.GetChild(0).GetComponent<ItemComponent>())
                         shotComponent = item.transform.GetChild(0).GetComponent<ItemComponent>();
                 }
 
@@ -293,14 +294,18 @@ public class PlayerCharacter : MonoBehaviour
 
     public void ActivateObject(GameObject go)
     {
-        go.GetComponent<Rigidbody>().useGravity = true;
-        go.GetComponent<Collider>().enabled = true;
-        go.transform.SetParent(null);
-
-        if (go.GetComponent<FixedJoint>())
+        if (go.GetComponent<Rigidbody>())
         {
-            go.GetComponent<FixedJoint>().connectedBody.GetComponent<Rigidbody>().useGravity = true;
-            go.GetComponent<FixedJoint>().connectedBody.GetComponent<Collider>().enabled = true;
+            Activate(go);
+        }
+        else
+        {
+            ItemComponent[] tempList = go.GetComponentsInChildren<ItemComponent>();
+
+            foreach (ItemComponent component in tempList)
+            {
+                Activate(component.gameObject);
+            }
         }
     }
 
@@ -320,6 +325,19 @@ public class PlayerCharacter : MonoBehaviour
             }
         }
 
+    }
+
+    public void Activate(GameObject go)
+    {
+        go.GetComponent<Rigidbody>().useGravity = true;
+        go.GetComponent<Collider>().enabled = true;
+        go.transform.SetParent(null);
+
+        if (go.GetComponent<FixedJoint>())
+        {
+            go.GetComponent<FixedJoint>().connectedBody.GetComponent<Rigidbody>().useGravity = true;
+            go.GetComponent<FixedJoint>().connectedBody.GetComponent<Collider>().enabled = true;
+        }
     }
 
     public void Deactivate(GameObject go)
