@@ -80,6 +80,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Shoot"",
+                    ""type"": ""Button"",
+                    ""id"": ""3da52a9f-c8a0-45d2-ad13-92cdcd4db1aa"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -192,6 +201,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""Combine"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3b8f62e6-0496-4970-a5c4-17c52531e5df"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Shoot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -206,6 +226,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_PlayerCharacter_Smash = m_PlayerCharacter.FindAction("Smash", throwIfNotFound: true);
         m_PlayerCharacter_CameraMovement = m_PlayerCharacter.FindAction("CameraMovement", throwIfNotFound: true);
         m_PlayerCharacter_Combine = m_PlayerCharacter.FindAction("Combine", throwIfNotFound: true);
+        m_PlayerCharacter_Shoot = m_PlayerCharacter.FindAction("Shoot", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -273,6 +294,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerCharacter_Smash;
     private readonly InputAction m_PlayerCharacter_CameraMovement;
     private readonly InputAction m_PlayerCharacter_Combine;
+    private readonly InputAction m_PlayerCharacter_Shoot;
     public struct PlayerCharacterActions
     {
         private @PlayerControls m_Wrapper;
@@ -283,6 +305,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @Smash => m_Wrapper.m_PlayerCharacter_Smash;
         public InputAction @CameraMovement => m_Wrapper.m_PlayerCharacter_CameraMovement;
         public InputAction @Combine => m_Wrapper.m_PlayerCharacter_Combine;
+        public InputAction @Shoot => m_Wrapper.m_PlayerCharacter_Shoot;
         public InputActionMap Get() { return m_Wrapper.m_PlayerCharacter; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -310,6 +333,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Combine.started += instance.OnCombine;
             @Combine.performed += instance.OnCombine;
             @Combine.canceled += instance.OnCombine;
+            @Shoot.started += instance.OnShoot;
+            @Shoot.performed += instance.OnShoot;
+            @Shoot.canceled += instance.OnShoot;
         }
 
         private void UnregisterCallbacks(IPlayerCharacterActions instance)
@@ -332,6 +358,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Combine.started -= instance.OnCombine;
             @Combine.performed -= instance.OnCombine;
             @Combine.canceled -= instance.OnCombine;
+            @Shoot.started -= instance.OnShoot;
+            @Shoot.performed -= instance.OnShoot;
+            @Shoot.canceled -= instance.OnShoot;
         }
 
         public void RemoveCallbacks(IPlayerCharacterActions instance)
@@ -357,5 +386,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnSmash(InputAction.CallbackContext context);
         void OnCameraMovement(InputAction.CallbackContext context);
         void OnCombine(InputAction.CallbackContext context);
+        void OnShoot(InputAction.CallbackContext context);
     }
 }

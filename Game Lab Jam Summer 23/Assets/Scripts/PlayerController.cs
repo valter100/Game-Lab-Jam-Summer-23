@@ -50,4 +50,9 @@ public class PlayerController : MonoBehaviour
     {
         return playerControls.PlayerCharacter.Combine.triggered;
     }
+
+    public bool Shoot()
+    {
+        return playerControls.PlayerCharacter.Shoot.triggered;
+    }
 }

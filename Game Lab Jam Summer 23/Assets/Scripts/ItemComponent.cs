@@ -7,16 +7,11 @@ public class ItemComponent : MonoBehaviour
     [SerializeField] List<Transform> attachmentPoints = new List<Transform>();
     [SerializeField] ItemComponent[] attachedItems;
     [SerializeField] List<string> acceptableItems = new List<string>();
+    [SerializeField] bool isShootable;
 
     void Start()
     {
         attachedItems = new ItemComponent[attachmentPoints.Count];
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     public void BindItem(GameObject go, bool first)
@@ -124,5 +119,14 @@ public class ItemComponent : MonoBehaviour
         }
 
         return numberOfItems > 0;
+    }
+    public void Shoot(GameObject go)
+    {
+        Debug.Log(gameObject.name + " shot " + go.name + "!");
+
+        //Vector3 directionVector = (go.transform.position - gameObject.transform.position).normalized;
+        Vector3 directionVector = (Camera.main.gameObject.transform.forward);
+        go.GetComponent<Rigidbody>().AddForceAtPosition(directionVector * 1500f, gameObject.transform.position/*-new Vector3(0,0.2f,0)*/);
+
     }
 }

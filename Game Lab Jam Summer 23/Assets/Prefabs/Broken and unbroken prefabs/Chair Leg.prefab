@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2708549192496952890}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: AttachmentPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43,9 +43,9 @@ GameObject:
   - component: {fileID: 5165132809917393346}
   - component: {fileID: 4368850918467004331}
   - component: {fileID: 7611780324836545647}
+  - component: {fileID: 6093741608115995826}
   - component: {fileID: 1932761342857961706}
   - component: {fileID: 1511187615}
-  - component: {fileID: 989746034829334627}
   m_Layer: 3
   m_Name: Chair Leg
   m_TagString: Untagged
@@ -135,6 +135,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!64 &6093741608115995826
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5732066343664390920}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4564847448827134883, guid: 453e6be605262ef4b80a13c033ec5ec9, type: 3}
 --- !u!114 &1932761342857961706
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -153,9 +167,6 @@ MonoBehaviour:
   acceptableItems:
   - Chair
   - Stone
-  - Goblet Bottom
-  - Goblet Top
-  - Inkwell Bottom
 --- !u!114 &1511187615
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -174,16 +185,3 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
---- !u!65 &989746034829334627
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5732066343664390920}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.08778614, y: 0.087786265, z: 0.55341786}
-  m_Center: {x: -0.29776797, y: 0.28085354, z: -0.27670893}
