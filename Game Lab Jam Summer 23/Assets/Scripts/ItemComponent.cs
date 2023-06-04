@@ -126,7 +126,7 @@ public class ItemComponent : MonoBehaviour
 
         //Vector3 directionVector = (go.transform.position - gameObject.transform.position).normalized;
         Vector3 directionVector = (Camera.main.gameObject.transform.forward);
-        go.GetComponent<Rigidbody>().AddForceAtPosition(directionVector * 1000f, gameObject.transform.position/*-new Vector3(0,0.2f,0)*/);
+        go.GetComponent<Rigidbody>().AddForceAtPosition(directionVector * 1500f, gameObject.transform.position/*-new Vector3(0,0.2f,0)*/);
 
     }
 }
