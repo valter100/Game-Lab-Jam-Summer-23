@@ -140,19 +140,19 @@ public class PlayerCharacter : MonoBehaviour
         if (leftGrabGameObject && !rightGrabGameObject && playerController.Smash())
         {
             animator.Play("RightSmash");
-            if (TrySmashObject(leftGrabGameObject))
-            {
-                leftGrabGameObject = null;
-            }
+            //if (TrySmashObject(leftGrabGameObject))
+            //{
+            //    leftGrabGameObject = null;
+            //}
         }
 
         if (rightGrabGameObject && !leftGrabGameObject && playerController.Smash())
         {
             animator.Play("LeftSmash");
-            if (TrySmashObject(rightGrabGameObject))
-            {
-                rightGrabGameObject = null;
-            }
+            //if (TrySmashObject(rightGrabGameObject))
+            //{
+            //    rightGrabGameObject = null;
+            //}
         }
 
         Debug.DrawRay(cam.transform.position, cam.transform.forward * grabDistance, Color.red);
@@ -257,5 +257,21 @@ public class PlayerCharacter : MonoBehaviour
     public GameObject GetRightObject()
     {
         return rightGrabGameObject;
+    }
+
+    public void DisarmRight()
+    {
+        if (TrySmashObject(rightGrabGameObject))
+        {
+            rightGrabGameObject = null;
+        }
+    }
+
+    public void DisarmLeft()
+    {
+        if (TrySmashObject(leftGrabGameObject))
+        {
+            leftGrabGameObject = null;
+        }
     }
 }
