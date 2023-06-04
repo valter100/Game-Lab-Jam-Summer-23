@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 7007287576660655814}
   - component: {fileID: 308521375558338086}
   - component: {fileID: 7312336374579927767}
-  - component: {fileID: 8194746609474882232}
   - component: {fileID: 1892954304624425428}
+  - component: {fileID: 7543211841809254424}
   m_Layer: 3
   m_Name: Goblet Top
   m_TagString: Untagged
@@ -122,20 +122,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!64 &8194746609474882232
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1251290961865305584}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -6284535486821434801, guid: c251fe671498ea84785ff39975a8b8f2, type: 3}
 --- !u!114 &1892954304624425428
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -155,6 +141,19 @@ MonoBehaviour:
   - Goblet Bottom
   - Chair Leg
   - Handle
+--- !u!65 &7543211841809254424
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1251290961865305584}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.083375365, y: 0.068949476, z: 0.07929468}
+  m_Center: {x: 0.00000008568168, y: 0.17035615, z: 0.000000018626451}
 --- !u!1 &8452100893195032196
 GameObject:
   m_ObjectHideFlags: 0
@@ -164,7 +163,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7981279328837824356}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: AttachmentPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}

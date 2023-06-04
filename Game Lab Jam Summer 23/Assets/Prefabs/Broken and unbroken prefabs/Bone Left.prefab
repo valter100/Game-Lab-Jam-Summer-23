@@ -163,7 +163,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8704231348284999088}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: AttachmentPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}

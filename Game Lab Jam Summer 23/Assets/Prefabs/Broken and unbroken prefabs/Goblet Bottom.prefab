@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4614498915364743721}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: AttachmentPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43,9 +43,9 @@ GameObject:
   - component: {fileID: 648496923934050715}
   - component: {fileID: 3765429612661056089}
   - component: {fileID: 3353631673892217702}
-  - component: {fileID: 780434091639580482}
   - component: {fileID: 2292005313592235324}
   - component: {fileID: 4920034265788757221}
+  - component: {fileID: 8513937494145486385}
   m_Layer: 3
   m_Name: Goblet Bottom
   m_TagString: Untagged
@@ -135,20 +135,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!64 &780434091639580482
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5156086786998201203}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -9199936500148611727, guid: c251fe671498ea84785ff39975a8b8f2, type: 3}
 --- !u!114 &2292005313592235324
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -187,3 +173,16 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!65 &8513937494145486385
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5156086786998201203}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.096093245, y: 0.13588138, z: 0.09139011}
+  m_Center: {x: 0.00000009313226, y: 0.06794072, z: -0.000000033527613}
