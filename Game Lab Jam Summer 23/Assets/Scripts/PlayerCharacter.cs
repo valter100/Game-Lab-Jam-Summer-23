@@ -96,7 +96,15 @@ public class PlayerCharacter : MonoBehaviour
                     if (targetedObject.GetComponent<FixedJoint>().connectedBody.name == rightGrabGameObject.name)
                         return;
 
-                leftGrabGameObject = targetedObject;
+                if(targetedObject.GetComponent<FixedJoint>())
+                {
+                    leftGrabGameObject = targetedObject.transform.parent.gameObject;
+                }
+                else
+                {
+                    leftGrabGameObject = targetedObject;
+                }
+
                 DeactivateObject(leftGrabGameObject);
                 targetedObject = null;
             }
@@ -116,7 +124,15 @@ public class PlayerCharacter : MonoBehaviour
                     if (targetedObject.GetComponent<FixedJoint>().connectedBody.name == leftGrabGameObject.name)
                         return;
 
-                rightGrabGameObject = targetedObject;
+                if (targetedObject.GetComponent<FixedJoint>())
+                {
+                    rightGrabGameObject = targetedObject.transform.parent.gameObject;
+                }
+                else
+                {
+                    rightGrabGameObject = targetedObject;
+                }
+
                 DeactivateObject(rightGrabGameObject);
                 targetedObject = null;
             }
@@ -124,12 +140,26 @@ public class PlayerCharacter : MonoBehaviour
 
         if (leftGrabGameObject)
         {
-            leftGrabGameObject.transform.position = leftGrabTransform.position;
+            if(!leftGrabGameObject.GetComponent<FixedJoint>() && !leftGrabGameObject.GetComponent<Rigidbody>())
+            {
+                leftGrabGameObject.transform.GetChild(0).transform.position = leftGrabTransform.position;
+            }
+            else
+            {
+                leftGrabGameObject.transform.position = leftGrabTransform.position;
+            }
         }
 
         if (rightGrabGameObject)
         {
-            rightGrabGameObject.transform.position = rightGrabTransform.position;
+            if (!rightGrabGameObject.GetComponent<FixedJoint>() && !rightGrabGameObject.GetComponent<Rigidbody>())
+            {
+                rightGrabGameObject.transform.GetChild(0).transform.position = rightGrabTransform.position;
+            }
+            else
+            {
+                rightGrabGameObject.transform.position = rightGrabTransform.position;
+            }
         }
 
         if (rightGrabGameObject && leftGrabGameObject && playerController.Combine())
@@ -140,19 +170,53 @@ public class PlayerCharacter : MonoBehaviour
         if (leftGrabGameObject && !rightGrabGameObject && playerController.Smash())
         {
             animator.Play("RightSmash");
-            //if (TrySmashObject(leftGrabGameObject))
-            //{
-            //    leftGrabGameObject = null;
-            //}
         }
 
         if (rightGrabGameObject && !leftGrabGameObject && playerController.Smash())
         {
             animator.Play("LeftSmash");
-            //if (TrySmashObject(rightGrabGameObject))
-            //{
-            //    rightGrabGameObject = null;
-            //}
+        }
+
+        if (playerController.Shoot())
+        {
+            List<GameObject> tempList = GetHeldItems();
+
+            foreach (GameObject item in tempList)
+            {
+                ShootableItemComponent shootComponent = null;
+                if (item.GetComponentInChildren<ShootableItemComponent>())
+                    shootComponent = item.GetComponentInChildren<ShootableItemComponent>();
+
+                if (!shootComponent)
+                    continue;
+
+                ItemComponent shotComponent = null;
+                //if (item.GetComponentInChildren<ItemComponent>())
+                //    shotComponent = item.GetComponentInChildren<ItemComponent>();
+
+                if(item.transform.GetChild(0).name == shootComponent.gameObject.name)
+                {
+                    if(item.transform.GetChild(1).GetComponent<ItemComponent>())
+                        shotComponent = item.transform.GetChild(1).GetComponent<ItemComponent>();
+                    else
+                        shotComponent = item.transform.GetChild(0).GetComponent<ItemComponent>();
+                }
+                else if(item.transform.GetChild(1).name == shootComponent.gameObject.name)
+                {
+                    if (item.transform.GetChild(1).GetComponent<ItemComponent>())
+                        shotComponent = item.transform.GetChild(1).GetComponent<ItemComponent>();
+                    else
+                        shotComponent = item.transform.GetChild(0).GetComponent<ItemComponent>();
+                }
+
+                if (shootComponent && shotComponent)
+                {
+                    shotComponent.Shoot(shootComponent.gameObject);
+                    TrySmashObject(shootComponent.gameObject);
+                    return;
+                }
+
+            }
         }
 
         Debug.DrawRay(cam.transform.position, cam.transform.forward * grabDistance, Color.red);
@@ -207,6 +271,22 @@ public class PlayerCharacter : MonoBehaviour
 
             return true;
         }
+        else if(smashObject.GetComponentInChildren<FixedJoint>())
+        {
+            GameObject firstObject = smashObject.GetComponentInChildren<ItemComponent>().gameObject;
+            GameObject otherObject = firstObject.GetComponent<FixedJoint>().connectedBody.gameObject;
+
+            firstObject.GetComponent<ItemComponent>().UnbindItem(otherObject, true);
+
+            ActivateObject(firstObject);
+            ActivateObject(otherObject);
+
+            Destroy(otherObject.GetComponent<FixedJoint>());
+            Destroy(firstObject.GetComponent<FixedJoint>());
+
+            Destroy(GameObject.Find(firstObject.name + " + " + otherObject.name));
+            Destroy(GameObject.Find(otherObject.name + " + " + firstObject.name));
+        }
 
         return false;
     }
@@ -225,6 +305,24 @@ public class PlayerCharacter : MonoBehaviour
     }
 
     public void DeactivateObject(GameObject go)
+    {
+        if(go.GetComponent<Rigidbody>())
+        {
+            Deactivate(go);
+        }
+        else
+        {
+            ItemComponent[] tempList = go.GetComponentsInChildren<ItemComponent>();
+
+            foreach(ItemComponent component in tempList)
+            {
+                Deactivate(component.gameObject);
+            }
+        }
+
+    }
+
+    public void Deactivate(GameObject go)
     {
         go.GetComponent<Rigidbody>().useGravity = false;
         go.GetComponent<Collider>().enabled = false;

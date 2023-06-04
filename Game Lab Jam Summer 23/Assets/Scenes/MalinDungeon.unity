@@ -524,6 +524,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5e10be2f5a748844dbd0b2b7e6fafd4a, type: 3}
+--- !u!1 &135388691 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5370885298080326447, guid: c0db6331c21206b41b4480b71b04f400, type: 3}
+  m_PrefabInstance: {fileID: 815651719}
+  m_PrefabAsset: {fileID: 0}
+--- !u!54 &135388696 stripped
+Rigidbody:
+  m_CorrespondingSourceObject: {fileID: 5370885298080326443, guid: c0db6331c21206b41b4480b71b04f400, type: 3}
+  m_PrefabInstance: {fileID: 815651719}
+  m_PrefabAsset: {fileID: 0}
+--- !u!138 &135388699
+FixedJoint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 135388691}
+  m_ConnectedBody: {fileID: 1363590658}
+  m_ConnectedArticulationBody: {fileID: 0}
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_EnableCollision: 0
+  m_EnablePreprocessing: 1
+  m_MassScale: 1
+  m_ConnectedMassScale: 1
 --- !u!1001 &154861383
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3106,6 +3131,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5370885296901497342, guid: c0db6331c21206b41b4480b71b04f400, type: 3}
+      propertyPath: m_Name
+      value: AttachmentPoint
+      objectReference: {fileID: 0}
+    - target: {fileID: 5370885297636689943, guid: c0db6331c21206b41b4480b71b04f400, type: 3}
+      propertyPath: m_Name
+      value: AttachmentPoint
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c0db6331c21206b41b4480b71b04f400, type: 3}
 --- !u!1001 &816812390
@@ -5456,6 +5489,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4804683279723337114, guid: cc19127617dbfcd49969e6174f07d00b, type: 3}
+      propertyPath: m_Mass
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4804683279723337114, guid: cc19127617dbfcd49969e6174f07d00b, type: 3}
+      propertyPath: m_Constraints
+      value: 116
+      objectReference: {fileID: 0}
     - target: {fileID: 6041497629407420981, guid: cc19127617dbfcd49969e6174f07d00b, type: 3}
       propertyPath: m_Name
       value: Player Character
@@ -5580,6 +5621,29 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5e10be2f5a748844dbd0b2b7e6fafd4a, type: 3}
+--- !u!1 &1317875153 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2543531893628709763, guid: 37cdf873662f8704680db1c4a8d3e344, type: 3}
+  m_PrefabInstance: {fileID: 1674294684}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1317875160
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1317875153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d713fb3d6fa3a0458cdabb18a43faa6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attachmentPoints:
+  - {fileID: 1504111687}
+  attachedItems: []
+  acceptableItems:
+  - Red Cube
+  isShootable: 1
 --- !u!1001 &1324946188
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5970,6 +6034,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5e10be2f5a748844dbd0b2b7e6fafd4a, type: 3}
+--- !u!1 &1363590653 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5370885297837969205, guid: c0db6331c21206b41b4480b71b04f400, type: 3}
+  m_PrefabInstance: {fileID: 815651719}
+  m_PrefabAsset: {fileID: 0}
+--- !u!54 &1363590658 stripped
+Rigidbody:
+  m_CorrespondingSourceObject: {fileID: 5370885297837969201, guid: c0db6331c21206b41b4480b71b04f400, type: 3}
+  m_PrefabInstance: {fileID: 815651719}
+  m_PrefabAsset: {fileID: 0}
+--- !u!138 &1363590661
+FixedJoint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1363590653}
+  m_ConnectedBody: {fileID: 135388696}
+  m_ConnectedArticulationBody: {fileID: 0}
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_EnableCollision: 0
+  m_EnablePreprocessing: 1
+  m_MassScale: 1
+  m_ConnectedMassScale: 1
 --- !u!1001 &1376971254
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6024,6 +6113,10 @@ PrefabInstance:
     - target: {fileID: 6715321473487237143, guid: d9fae8d5befc3234482440401699ca2e, type: 3}
       propertyPath: m_Name
       value: InkwellBottom
+      objectReference: {fileID: 0}
+    - target: {fileID: 6715321474697977564, guid: d9fae8d5befc3234482440401699ca2e, type: 3}
+      propertyPath: m_Name
+      value: AttachmentPoint
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d9fae8d5befc3234482440401699ca2e, type: 3}
@@ -6181,6 +6274,11 @@ MeshCollider:
 Transform:
   m_CorrespondingSourceObject: {fileID: 8669240701490022791, guid: 797162f1e2611d14bac618083727de40, type: 3}
   m_PrefabInstance: {fileID: 1397150493}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1504111687 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 355177847, guid: 37cdf873662f8704680db1c4a8d3e344, type: 3}
+  m_PrefabInstance: {fileID: 1674294684}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1517710492
 PrefabInstance:
@@ -6686,7 +6784,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1425927642, guid: 37cdf873662f8704680db1c4a8d3e344, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 37cdf873662f8704680db1c4a8d3e344, type: 3}
 --- !u!1001 &1676431791
 PrefabInstance:
@@ -7333,6 +7432,10 @@ PrefabInstance:
     - target: {fileID: 1872563281505594317, guid: 12b2805ec4359494f8c9272e380e266e, type: 3}
       propertyPath: m_Name
       value: InkwellTop
+      objectReference: {fileID: 0}
+    - target: {fileID: 1872563282014257397, guid: 12b2805ec4359494f8c9272e380e266e, type: 3}
+      propertyPath: m_Name
+      value: AttachmentPoint
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12b2805ec4359494f8c9272e380e266e, type: 3}
