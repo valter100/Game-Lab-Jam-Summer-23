@@ -150,8 +150,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attachmentPoints:
   - {fileID: 6715321474697977565}
-  attachedItems:
-  - {fileID: 0}
+  attachedItems: []
   acceptableItems:
   - InkwellTop
 --- !u!1 &6715321474697977564
