@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5370885296467163373}
   m_Layer: 0
-  m_Name: InkwellTop + InkwellBottom
+  m_Name: Inkwell Top + Inkwell Bottom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
