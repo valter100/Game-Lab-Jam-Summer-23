@@ -185,3 +185,5 @@ MonoBehaviour:
   attachedItems: []
   acceptableItems:
   - Edge
+  - Goblet Top
+  - Inkwell Bottom
