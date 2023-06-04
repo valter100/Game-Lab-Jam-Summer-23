@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5600808299401862126}
   m_Layer: 0
-  m_Name: Attachmentpoint
+  m_Name: AttachmentPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,8 +44,9 @@ GameObject:
   - component: {fileID: 8942804276004521031}
   - component: {fileID: 1710465737290106157}
   - component: {fileID: 5225522381130918985}
-  - component: {fileID: 7339556538339243176}
-  m_Layer: 0
+  - component: {fileID: 920921597}
+  - component: {fileID: 920921598}
+  m_Layer: 3
   m_Name: Handle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -149,18 +150,38 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -6659003102834268097, guid: 74acaa42d77eb204888885c1304dd2bc, type: 3}
---- !u!138 &7339556538339243176
-FixedJoint:
+--- !u!114 &920921597
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7429749076074669458}
-  m_ConnectedBody: {fileID: 0}
-  m_ConnectedArticulationBody: {fileID: 0}
-  m_BreakForce: Infinity
-  m_BreakTorque: Infinity
-  m_EnableCollision: 0
-  m_EnablePreprocessing: 1
-  m_MassScale: 1
-  m_ConnectedMassScale: 1
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 0, g: 0, b: 0, a: 1}
+  outlineWidth: 10
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
+--- !u!114 &920921598
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7429749076074669458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bdedd034cc54134f910ad537f6e25c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attachmentPoints:
+  - {fileID: 5600808299401862126}
+  attachedItems: []
+  acceptableItems:
+  - Edge

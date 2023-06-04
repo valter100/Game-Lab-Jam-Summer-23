@@ -44,8 +44,9 @@ GameObject:
   - component: {fileID: 7020392416949710727}
   - component: {fileID: 8746802696165768589}
   - component: {fileID: 4191222090727440514}
-  - component: {fileID: 2673238021506997255}
-  m_Layer: 0
+  - component: {fileID: 427710453}
+  - component: {fileID: 427710454}
+  m_Layer: 3
   m_Name: Edge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -148,18 +149,38 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -1083108532252104561, guid: 68ec408a17f516b429f508fa697026e7, type: 3}
---- !u!138 &2673238021506997255
-FixedJoint:
+--- !u!114 &427710453
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8821863122648010322}
-  m_ConnectedBody: {fileID: 0}
-  m_ConnectedArticulationBody: {fileID: 0}
-  m_BreakForce: Infinity
-  m_BreakTorque: Infinity
-  m_EnableCollision: 0
-  m_EnablePreprocessing: 1
-  m_MassScale: 1
-  m_ConnectedMassScale: 1
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 0, g: 0, b: 0, a: 1}
+  outlineWidth: 10
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
+--- !u!114 &427710454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8821863122648010322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bdedd034cc54134f910ad537f6e25c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attachmentPoints:
+  - {fileID: 1134618354741394193}
+  attachedItems: []
+  acceptableItems:
+  - Handle
