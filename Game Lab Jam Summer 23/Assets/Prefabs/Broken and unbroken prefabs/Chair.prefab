@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8505714001113557059}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: AttachmentPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42,10 +42,10 @@ GameObject:
   - component: {fileID: 1540520265295175586}
   - component: {fileID: 5564116247267821509}
   - component: {fileID: 3072790899339488627}
+  - component: {fileID: 1790242457443080758}
   - component: {fileID: 2766403028473743407}
   - component: {fileID: 6989312980547295004}
   - component: {fileID: 2077510696}
-  - component: {fileID: 79408834442913401}
   m_Layer: 3
   m_Name: Chair
   m_TagString: Untagged
@@ -119,6 +119,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &1790242457443080758
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8650118899049762201}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -6264831526926562434, guid: 453e6be605262ef4b80a13c033ec5ec9, type: 3}
 --- !u!114 &2766403028473743407
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -170,17 +184,3 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
---- !u!64 &79408834442913401
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8650118899049762201}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -6264831526926562434, guid: 453e6be605262ef4b80a13c033ec5ec9, type: 3}
