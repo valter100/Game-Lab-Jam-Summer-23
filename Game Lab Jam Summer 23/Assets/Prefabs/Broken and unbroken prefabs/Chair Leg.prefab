@@ -169,6 +169,7 @@ MonoBehaviour:
   - Stone
   - Goblet Bottom
   - Goblet Top
+  - Inkwell Bottom
 --- !u!114 &1511187615
 MonoBehaviour:
   m_ObjectHideFlags: 0

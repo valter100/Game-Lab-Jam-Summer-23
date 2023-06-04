@@ -154,6 +154,9 @@ MonoBehaviour:
   acceptableItems:
   - Inkwell Bottom
   - Plant Root
+  - Goblet Bottom
+  - Bone Left
+  - Bone Right
 --- !u!1 &1872563282014257397
 GameObject:
   m_ObjectHideFlags: 0
