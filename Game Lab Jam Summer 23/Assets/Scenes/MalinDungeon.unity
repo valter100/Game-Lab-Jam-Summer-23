@@ -8086,11 +8086,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 747888917684796559, guid: 01d1d586e6bbe0b4eac7b84e9309fdfb, type: 3}
       propertyPath: questItemsNeeded.Array.data[0]
-      value: Red Cube
+      value: Inkwell Top
       objectReference: {fileID: 0}
     - target: {fileID: 747888917684796559, guid: 01d1d586e6bbe0b4eac7b84e9309fdfb, type: 3}
       propertyPath: questItemsNeeded.Array.data[1]
-      value: Green Cube
+      value: Plant Root
       objectReference: {fileID: 0}
     - target: {fileID: 3873893827541024117, guid: 01d1d586e6bbe0b4eac7b84e9309fdfb, type: 3}
       propertyPath: m_Name
