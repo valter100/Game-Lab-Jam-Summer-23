@@ -41,9 +41,17 @@ PrefabInstance:
     m_TransformParent: {fileID: 5370885296467163373}
     m_Modifications:
     - target: {fileID: 3974512824225682677, guid: d9fae8d5befc3234482440401699ca2e, type: 3}
+      propertyPath: attachedItems.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3974512824225682677, guid: d9fae8d5befc3234482440401699ca2e, type: 3}
       propertyPath: attachedItems.Array.data[0]
       value: 
       objectReference: {fileID: 9074672028577860919}
+    - target: {fileID: 3974512824225682677, guid: d9fae8d5befc3234482440401699ca2e, type: 3}
+      propertyPath: acceptableItems.Array.data[0]
+      value: Inkwell Top
+      objectReference: {fileID: 0}
     - target: {fileID: 6715321473487237138, guid: d9fae8d5befc3234482440401699ca2e, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -90,7 +98,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6715321473487237143, guid: d9fae8d5befc3234482440401699ca2e, type: 3}
       propertyPath: m_Name
-      value: InkwellBottom
+      value: Inkwell Bottom
+      objectReference: {fileID: 0}
+    - target: {fileID: 6715321474697977564, guid: d9fae8d5befc3234482440401699ca2e, type: 3}
+      propertyPath: m_Name
+      value: AttachmentPoint
       objectReference: {fileID: 0}
     - target: {fileID: 7128170764357084195, guid: d9fae8d5befc3234482440401699ca2e, type: 3}
       propertyPath: m_ConnectedBody
@@ -103,7 +115,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3974512824225682677, guid: d9fae8d5befc3234482440401699ca2e, type: 3}
   m_PrefabInstance: {fileID: 1709304031601655586}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 5370885297837969205}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6bdedd034cc54134f910ad537f6e25c8, type: 3}
@@ -119,6 +131,26 @@ Rigidbody:
   m_CorrespondingSourceObject: {fileID: 6715321473487237139, guid: d9fae8d5befc3234482440401699ca2e, type: 3}
   m_PrefabInstance: {fileID: 1709304031601655586}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &5370885297837969205 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6715321473487237143, guid: d9fae8d5befc3234482440401699ca2e, type: 3}
+  m_PrefabInstance: {fileID: 1709304031601655586}
+  m_PrefabAsset: {fileID: 0}
+--- !u!138 &1210452060
+FixedJoint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5370885297837969205}
+  m_ConnectedBody: {fileID: 5370885298080326443}
+  m_ConnectedArticulationBody: {fileID: 0}
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_EnableCollision: 0
+  m_EnablePreprocessing: 1
+  m_MassScale: 1
+  m_ConnectedMassScale: 1
 --- !u!1001 &6013882042979616994
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -172,12 +204,28 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1872563281505594317, guid: 12b2805ec4359494f8c9272e380e266e, type: 3}
       propertyPath: m_Name
-      value: InkwellTop
+      value: Inkwell Top
+      objectReference: {fileID: 0}
+    - target: {fileID: 1872563282014257397, guid: 12b2805ec4359494f8c9272e380e266e, type: 3}
+      propertyPath: m_Name
+      value: AttachmentPoint
+      objectReference: {fileID: 0}
+    - target: {fileID: 3358049230201030101, guid: 12b2805ec4359494f8c9272e380e266e, type: 3}
+      propertyPath: attachedItems.Array.size
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3358049230201030101, guid: 12b2805ec4359494f8c9272e380e266e, type: 3}
       propertyPath: attachedItems.Array.data[0]
       value: 
       objectReference: {fileID: 2346626845928500183}
+    - target: {fileID: 3358049230201030101, guid: 12b2805ec4359494f8c9272e380e266e, type: 3}
+      propertyPath: acceptableItems.Array.data[0]
+      value: Inkwell Bottom
+      objectReference: {fileID: 0}
+    - target: {fileID: 3358049230201030101, guid: 12b2805ec4359494f8c9272e380e266e, type: 3}
+      propertyPath: acceptableItems.Array.data[1]
+      value: Plant Root
+      objectReference: {fileID: 0}
     - target: {fileID: 8457011395027780052, guid: 12b2805ec4359494f8c9272e380e266e, type: 3}
       propertyPath: m_ConnectedBody
       value: 
@@ -194,12 +242,32 @@ Rigidbody:
   m_CorrespondingSourceObject: {fileID: 1872563281505594313, guid: 12b2805ec4359494f8c9272e380e266e, type: 3}
   m_PrefabInstance: {fileID: 6013882042979616994}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &5370885298080326447 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1872563281505594317, guid: 12b2805ec4359494f8c9272e380e266e, type: 3}
+  m_PrefabInstance: {fileID: 6013882042979616994}
+  m_PrefabAsset: {fileID: 0}
+--- !u!138 &218205037
+FixedJoint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5370885298080326447}
+  m_ConnectedBody: {fileID: 5370885297837969201}
+  m_ConnectedArticulationBody: {fileID: 0}
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_EnableCollision: 0
+  m_EnablePreprocessing: 1
+  m_MassScale: 1
+  m_ConnectedMassScale: 1
 --- !u!114 &9074672028577860919 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3358049230201030101, guid: 12b2805ec4359494f8c9272e380e266e, type: 3}
   m_PrefabInstance: {fileID: 6013882042979616994}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 5370885298080326447}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6bdedd034cc54134f910ad537f6e25c8, type: 3}
